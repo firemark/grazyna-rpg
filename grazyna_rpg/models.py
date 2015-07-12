@@ -54,7 +54,7 @@ class Hero(Model):
 class Item(Model):
     hero_id = ForeignKey(Hero, nullable=False)
     name = Column(String(50))
-    type = Column(String(1), [e.value for e in RaceEnum])
+    type = Column(String(1), [e.value for e in ItemType])
 
 
 class skill(Model):
