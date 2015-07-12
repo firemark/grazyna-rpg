@@ -26,5 +26,10 @@ def eat(bot, item):
 
 
 @register(cmd='kill')
-def kill(bot, item):
+def kill(bot, who):
+    pass
+
+
+@register(reg='^(\w+)(!{1,3})')
+def shout(bot, spell):
     pass
