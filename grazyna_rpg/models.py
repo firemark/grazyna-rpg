@@ -42,11 +42,12 @@ class Model(Base):
 class Hero(Model):
     username = Column(String(50), unique=True)
     race = Column(String(1), [e.value for e in RaceEnum])
-    world = Column(String(50))
-    x = Column(Integer)
-    y = Column(Integer)
-    z = Column(Integer)
+    #world = Column(String(50)) #probls useless
+    #x = Column(Integer)
+    #y = Column(Integer)
+    #z = Column(Integer)
     level = Column(Integer, default=1)
+    exp = Column(Integer, default=0)
     hp = Column(Integer, default=30)
     mana = Column(Integer, default=30)
 
