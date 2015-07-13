@@ -1,13 +1,13 @@
 body {
     color: #D9D6CF;
-    background-color: rgb(45, 56, 58);
+    background-color: #2d383a;
 }
 
 #map {
     float: left;
     border-collapse: collapse;
     background-color: #D9D6CF;
-    color: rgb(45, 56, 58);
+    color: #2d383a;
     margin-right: 15px;
 }
 
@@ -24,9 +24,32 @@ body {
     float: left;
 }
 
-select, input[type="text"] {
-    background-color: #D9D6CF;
-    color: rgb(45, 56, 58);
+select, input {
+    background-color: #C9C0BB;
+    color: #2d383a;
+    border: 1px solid black;
     font-size: 10pt;
     width: 150px;
+}
+
+button {
+    background-color: #E6BC5C;
+    color: #2d383a;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 10pt;
+}
+
+button:active {
+    border: 1px solid #C9C0BB;
+}
+
+span {
+    clear: both;
+    float: left;
+}
+
+span b {
+    width: 100px;
+    float: left;
 }

@@ -8,20 +8,28 @@
     <body onload="init()">
         <table id="map">
         </table>
-        <form id="menu">
+        <div id="menu">
             <h1>map editor</h1>
             <h2></h2>
-            <select>
-                <option selected>---</option>
-                <option>forest</option>
-                <option>stonerun</option>
-                <option>dungeon</option>
-                <option>area</option>
-                <option>hell</option>
-                <option>market</option>
-                <option>hospital</option>
-                <option>respawn</option>
-            </select>
-        </form>
+            <span>
+                <b>tile type</b>
+                <select name="tile_type">
+                    <option selected>---</option>
+                    <option value="forest">forest</option>
+                    <option value="dungeon">dungeon</option>
+                    <option value="area">area</option>
+                    <option value="hell">hell</option>
+                    <option value="market">market</option>
+                    <option value="town">town</option>
+                    <option value="host">hospital</option>
+                    <option value="resp">respawn</option>
+                </select>
+            </span>
+            <span><b>name</b> <input name="name" /></span>
+            <span><b>monster types</b> <input name="mon_types" pattern="([a-z]+,)+" /></span>
+            <span><b>portal to</b> <input name="portal" pattern="[a-z]+" /></span>
+            <span><input name='stairs' type="checkbox" /> <b>stairs</b></span>
+            <span><button>Save map</button></span>
+        </div>
     </body>
 </html>
