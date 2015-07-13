@@ -1,5 +1,10 @@
 var map = {};
 
+var selectedCell = null;
+var selectedCors = null;
+
+
+
 function init() {
     var node_map = document.getElementById('map');
 
@@ -27,9 +32,38 @@ function click_cell(){
 }
 
 function select_cell(x, y, z) {
+    update_cell();
+    selectedCors = {x: x, y: y, z: z};
+    selectedCell = map[x + '-' + y];
+    if (selectedCell) {
+        selectedCell = JSON.parse(JSON.stringify(selectedCell))  //clone
+    } else {
+        selectedCell = {
+            tile_type: '---',
+            name: '',
+            mon_types: '',
+            portal: '',
+            stairs: false
+        };
+    }
+
     document.querySelector('#menu h2').innerText = x + '×' + y;
+    var inputs = document.querySelectorAll('#menu input, #menu select');
+    for (var i = 0; i < inputs.length; ++i) {
+        var input = inputs[i];
+        input.value = selectedCell[input.name];
+    }
 }
 
-function update_cell(x, y, z) {
-    //todo
+function update_cell() {
+    if (!selectedCell)
+        return;
+    var inputs = document.querySelectorAll('#menu input, #menu select');
+    for (var i = 0; i < inputs.length; ++i) {
+        var input = inputs[i];
+        selectedCell[input.name] = input.value;
+    }
+    if (selectedCell.tile_type == '---')
+        return;
+    map[selectedCors.x + '-' + selectedCors.y] = selectedCell;
 }
