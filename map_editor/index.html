@@ -13,7 +13,7 @@
             <h2></h2>
             <span>
                 <b>tile type</b>
-                <select name="tile_type">
+                <select name="tile_type" onclick="update_cell()">
                     <option selected>---</option>
                     <option value="forest">forest</option>
                     <option value="dungeon">dungeon</option>
@@ -21,8 +21,8 @@
                     <option value="hell">hell</option>
                     <option value="market">market</option>
                     <option value="town">town</option>
-                    <option value="host">hospital</option>
-                    <option value="resp">respawn</option>
+                    <option value="hospital">hospital</option>
+                    <option value="respawn">respawn</option>
                 </select>
             </span>
             <span><b>name</b> <input name="name" /></span>

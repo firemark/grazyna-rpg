@@ -3,7 +3,17 @@ var map = {};
 var selectedCell = null;
 var selectedCors = null;
 
-
+var mapColors = {
+    '---': '#D9D6CF',
+    forest: '#5E8C31',
+    dungeon: '#253529',
+    area: '#926F5B',
+    hell: '#CA3435',
+    market: '#F2C649',
+    town: '#A9B2C3',
+    hospital: '#2887C8',
+    respawn: '#6CDAE7'
+};
 
 function init() {
     var node_map = document.getElementById('map');
@@ -12,7 +22,7 @@ function init() {
         var node_tr = document.createElement('tr');
         for (var j = 0; j < 32; j++) {
             var node_td = document.createElement('td');
-            node_td.className = i + '-' + j;
+            node_td.id = 'cell-' + j + '-' + i;
             node_td.dataset.x = j;
             node_td.dataset.y = i;
             node_td.onclick = click_cell;
@@ -36,7 +46,7 @@ function select_cell(x, y, z) {
     selectedCors = {x: x, y: y, z: z};
     selectedCell = map[x + '-' + y];
     if (selectedCell) {
-        selectedCell = JSON.parse(JSON.stringify(selectedCell))  //clone
+        selectedCell = JSON.parse(JSON.stringify(selectedCell)); //clone
     } else {
         selectedCell = {
             tile_type: '---',
@@ -63,7 +73,13 @@ function update_cell() {
         var input = inputs[i];
         selectedCell[input.name] = input.value;
     }
-    if (selectedCell.tile_type == '---')
-        return;
-    map[selectedCors.x + '-' + selectedCors.y] = selectedCell;
-}
+    var key = selectedCors.x + '-' + selectedCors.y;
+    var cellNode = document.querySelector('#cell-' + key);
+    cellNode.style.backgroundColor = mapColors[selectedCell.tile_type];
+    if (selectedCell.tile_type == '---') {
+        if (map[key] != undefined) delete map[key];
+    } else {
+        map[key] = selectedCell;
+    }
+
+};
