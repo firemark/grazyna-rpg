@@ -16,21 +16,28 @@ var mapColors = {
 };
 
 function init() {
-    var node_map = document.getElementById('map');
 
-    for(var i=0; i < 32; i++) {
+}
+
+function updateMap() {
+    var node_map = document.getElementById('map');
+    node_map.innerHTML = '';
+
+    for(var y = 0; y < 32; y++) {
         var node_tr = document.createElement('tr');
-        for (var j = 0; j < 32; j++) {
+        for (var x = 0; x < 32; x++) {
             var node_td = document.createElement('td');
-            node_td.id = 'cell-' + j + '-' + i;
-            node_td.dataset.x = j;
-            node_td.dataset.y = i;
+            node_td.id = 'cell-' + x + '-' + y;
+            node_td.dataset.x = x;
+            node_td.dataset.y = y;
+            var color = mapColors[(map[x + '-' + y] || {}).tile_type];
+            node_td.style.backgroundColor = color;
             node_td.onclick = click_cell;
             node_tr.appendChild(node_td);
         }
         node_map.appendChild(node_tr);
     }
-    select_cell(0, 0);
+    select_cell(15, 15);
 }
 
 
@@ -65,7 +72,7 @@ function select_cell(x, y, z) {
 
     document.querySelector('#menu h2').innerText = x + '×' + y;
     document.querySelector('#cell-' + x + "-" + y).innerText = '⚫';
-    var inputs = document.querySelectorAll('#menu input, #menu select');
+    var inputs = document.querySelectorAll('#fields input, #fields select');
     for (var i = 0; i < inputs.length; ++i) {
         var input = inputs[i];
         input.value = selectedCell[input.name];
@@ -75,7 +82,7 @@ function select_cell(x, y, z) {
 function update_cell() {
     if (!selectedCell)
         return;
-    var inputs = document.querySelectorAll('#menu input, #menu select');
+    var inputs = document.querySelectorAll('#fields input, #fields select');
     for (var i = 0; i < inputs.length; ++i) {
         var input = inputs[i];
         selectedCell[input.name] = input.value;
@@ -111,5 +118,12 @@ function save_map(e) {
 }
 
 function load_map(e) {
-
+	var fileReader = new FileReader();
+	fileReader.onload = function(ee) {
+        map = JSON.parse(ee.target.result);
+		updateMap();
+	};
+    var node = e.target;
+	fileReader.readAsText(node.files[0], "UTF-8");
+    return true;
 }

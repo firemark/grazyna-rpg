@@ -33,6 +33,9 @@ select, input {
     color: #2d383a;
     border: 1px solid black;
     font-size: 10pt;
+}
+
+input[type='text'] {
     width: 150px;
 }
 
