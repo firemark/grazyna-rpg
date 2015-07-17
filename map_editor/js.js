@@ -16,6 +16,16 @@ var mapColors = {
 };
 
 function init() {
+    updateMap();
+    var monTypeNode = document.getElementById('mon_type');
+    var monTypesNode = document.getElementById('mon_types');
+    for(var i=1; i <= 3; i++){
+        var newNode = monTypeNode.cloneNode(true);
+        newNode.name = 'mon_type' + i;
+        newNode.id = null;
+        monTypesNode.appendChild(newNode);
+    }
+    monTypesNode.removeChild(monTypeNode);
 
 }
 
@@ -96,8 +106,7 @@ function update_cell() {
     } else {
         map[key] = selectedCell;
     }
-
-};
+}
 
 function save_map(e) {
     update_cell();

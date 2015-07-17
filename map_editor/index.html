@@ -15,7 +15,7 @@
                 <span>
                     <b>tile type</b>
                     <select name="tile_type" onclick="update_cell()">
-                        <option selected>---</option>
+                        <option selected value="-">---</option>
                         <option value="forest">forest</option>
                         <option value="dungeon">dungeon</option>
                         <option value="area">area</option>
@@ -27,7 +27,20 @@
                     </select>
                 </span>
                 <span><b>name</b> <input name="name" /></span>
-                <span><b>monster types</b> <input name="mon_types" pattern="([a-z]+,)+" /></span>
+                <span><b>monster types</b></span>
+                <span>
+                    <div id="mon_types">
+                        <select id="mon_type">
+                            <option selected value="-">---</option>
+                            <option value="animal">animal</option>
+                            <option value="org">org</option>
+                            <option value="ghost">ghost</option>
+                            <option value="elemental">elemental</option>
+                            <option value="thief">thief</option>
+                            <option value="warrior">warrior</option>
+                        </select>
+                    </div>
+                </span>
                 <span><b>portal to</b> <input name="portal" pattern="[a-z]+" /></span>
                 <span><input name='stairs' type="checkbox" /> <b>stairs</b></span>
             </div>
