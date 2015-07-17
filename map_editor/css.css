@@ -6,7 +6,7 @@ body {
 #map {
     float: left;
     border-collapse: collapse;
-    background-color: #D9D6CF;
+    background-color: #a5a29b;
     color: #2d383a;
     margin-right: 15px;
 }
@@ -16,8 +16,12 @@ body {
 }
 
 #map td {
+    font-size: 8pt;
+    text-align: center;
+    color: white;
     width: 16px;
     height: 16px;
+    cursor: crosshair;
 }
 
 #menu {
@@ -32,15 +36,18 @@ select, input {
     width: 150px;
 }
 
-button {
+a.btn {
     background-color: #E6BC5C;
     color: #2d383a;
     border: 1px solid black;
     border-radius: 5px;
+    padding: 2px 5px;
     font-size: 10pt;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-button:active {
+a.btn:active {
     border: 1px solid #C9C0BB;
 }
 

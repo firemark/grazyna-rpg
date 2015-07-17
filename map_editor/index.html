@@ -29,7 +29,10 @@
             <span><b>monster types</b> <input name="mon_types" pattern="([a-z]+,)+" /></span>
             <span><b>portal to</b> <input name="portal" pattern="[a-z]+" /></span>
             <span><input name='stairs' type="checkbox" /> <b>stairs</b></span>
-            <span><button>Save map</button></span>
+            <span>
+                <a class="btn" href="#" onclick="return save_map(event);">Save map</a>
+                <a class="btn" href="#" onclick="return load_map(event);">Load map</a>
+            </span>
         </div>
     </body>
 </html>

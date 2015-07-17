@@ -4,7 +4,7 @@ var selectedCell = null;
 var selectedCors = null;
 
 var mapColors = {
-    '---': '#D9D6CF',
+    '---': '',
     forest: '#5E8C31',
     dungeon: '#253529',
     area: '#926F5B',
@@ -42,7 +42,13 @@ function click_cell(){
 }
 
 function select_cell(x, y, z) {
+    if (selectedCell) {
+        var key = selectedCors.x + '-' + selectedCors.y;
+        document.querySelector('#cell-' + key).innerText = '';
+    }
+
     update_cell();
+    document.querySelector('#cell-' + x + "-" + y).innerText = '×';
     selectedCors = {x: x, y: y, z: z};
     selectedCell = map[x + '-' + y];
     if (selectedCell) {
@@ -58,6 +64,7 @@ function select_cell(x, y, z) {
     }
 
     document.querySelector('#menu h2').innerText = x + '×' + y;
+    document.querySelector('#cell-' + x + "-" + y).innerText = 'X';
     var inputs = document.querySelectorAll('#menu input, #menu select');
     for (var i = 0; i < inputs.length; ++i) {
         var input = inputs[i];
@@ -77,9 +84,32 @@ function update_cell() {
     var cellNode = document.querySelector('#cell-' + key);
     cellNode.style.backgroundColor = mapColors[selectedCell.tile_type];
     if (selectedCell.tile_type == '---') {
-        if (map[key] != undefined) delete map[key];
+        if (map[key] != undefined)
+            delete map[key];
     } else {
         map[key] = selectedCell;
     }
 
 };
+
+function save_map(e) {
+    update_cell();
+    var node = e.target;
+    var content = JSON.stringify(map);
+    var blob = new Blob([content], {type:'application/json'});
+
+    if (window.URL) {
+        node.href = window.URL.createObjectURL(blob);
+    } else if (window.webkitURL) {
+        node.href = window.webkitURL.createObjectURL(blob);
+    } else {
+        alert('srsly, update browser');
+        return false;
+    }
+    node.download = 'map.json';
+    return true;
+}
+
+function load_map(e) {
+
+}
