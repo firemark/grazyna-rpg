@@ -64,7 +64,7 @@ function select_cell(x, y, z) {
     }
 
     document.querySelector('#menu h2').innerText = x + '×' + y;
-    document.querySelector('#cell-' + x + "-" + y).innerText = 'X';
+    document.querySelector('#cell-' + x + "-" + y).innerText = '⚫';
     var inputs = document.querySelectorAll('#menu input, #menu select');
     for (var i = 0; i < inputs.length; ++i) {
         var input = inputs[i];
