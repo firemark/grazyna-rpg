@@ -10,7 +10,7 @@ var mapColors = {
     area: '#926F5B',
     hell: '#CA3435',
     market: '#F2C649',
-    town: '#A9B2C3',
+    town: '#736A62',
     hospital: '#2887C8',
     respawn: '#6CDAE7'
 };
