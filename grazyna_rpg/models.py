@@ -42,14 +42,15 @@ class Model(Base):
 class Hero(Model):
     username = Column(String(50), unique=True)
     race = Column(String(1), [e.value for e in RaceEnum])
-    #world = Column(String(50)) #probls useless
-    #x = Column(Integer)
-    #y = Column(Integer)
-    #z = Column(Integer)
+    world = Column(String(50))  #probls useless
+    x = Column(Integer, default=0)
+    y = Column(Integer, default=0)
+    z = Column(Integer, default=0)
     level = Column(Integer, default=1)
     exp = Column(Integer, default=0)
     hp = Column(Integer, default=30)
     mana = Column(Integer, default=30)
+    money = Column(Integer, default=0)
 
 
 class Item(Model):
@@ -58,6 +59,6 @@ class Item(Model):
     type = Column(String(1), [e.value for e in ItemType])
 
 
-class skill(Model):
+class Skill(Model):
     hero_id = ForeignKey(Hero, nullable=False)
-    skill = Column(String(50))
+    name = Column(String(50))
