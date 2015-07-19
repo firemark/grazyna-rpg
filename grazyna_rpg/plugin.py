@@ -31,5 +31,5 @@ def kill(bot, who):
 
 
 @register(reg='^(\w+)(!{1,3})')
-def shout(bot, spell):
+def shout(bot, spell, power:lambda x: len(x)):
     pass
