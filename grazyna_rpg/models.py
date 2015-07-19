@@ -3,33 +3,9 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-
-from enum import Enum
+from .enums import ItemType
 
 Base = declarative_base()
-
-
-class WhereEnum(Enum):
-    west = 'w'
-    east = 'e'
-    north = 'n'
-    south = 's'
-    portal = 'p'
-    up = 'u'
-    down = 'd'
-
-
-class RaceEnum(Enum):
-    elf = 'e'
-    human = 'h'
-    org = 'o'
-    socek = 's'  # :-)
-
-
-class ItemType(Enum):
-    sword = 's'
-    bow = 'b'
-    armor = 'a'
 
 
 class Model(Base):
@@ -41,7 +17,7 @@ class Model(Base):
 
 class Hero(Model):
     username = Column(String(50), unique=True)
-    race = Column(String(1), [e.value for e in RaceEnum])
+    race = Column(String(50))
     world = Column(String(50))  #probls useless
     x = Column(Integer, default=0)
     y = Column(Integer, default=0)
