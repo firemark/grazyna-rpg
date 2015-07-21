@@ -3,6 +3,9 @@ from .monster import Monster
 from .level import Level
 from .enums import DirectionEnum, LevelType
 
+class PathNotFound(Exception):
+    pass
+
 
 class WorldManager(object):
     DIRECTIONS_TO_CONNECTIONS = {
@@ -12,7 +15,7 @@ class WorldManager(object):
         DirectionEnum.south: (0, -1)
     }
     levels = None
-    actual_point = None
+    actual_level = None
 
     def __init__(self, map):
         self.levels = {
@@ -40,6 +43,13 @@ class WorldManager(object):
 
     def seek_respawn(self):
         return next((
-            cord for cord, level in self.levels.items()
+            level for level in self.levels.values()
             if level.type is LevelType.respawn
         ), None)
+
+    def move(self, direction):
+        try:
+            self.actual_level = self.actual_level.directions[direction]
+        except:
+            raise PathNotFound(direction)
+

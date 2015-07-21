@@ -1,5 +1,7 @@
+import pytest
+
 from .enums import LevelType, DirectionEnum
-from .world_manager import WorldManager
+from .world_manager import WorldManager, PathNotFound
 
 BASIC_MAP = {
     '2-2': {'title_type': 'respawn', 'name': 'xx1',
@@ -36,9 +38,26 @@ def test_create_directions_on_map():
 
 def test_seek_respawn():
     mgr = WorldManager(BASIC_MAP)
-    assert mgr.seek_respawn() == (2, 2)
+    assert mgr.seek_respawn() is mgr.levels[2, 2]
 
 
 def test_respawn_not_found():
     mgr = WorldManager({})
     assert mgr.seek_respawn() is None
+
+
+def test_move():
+    mgr = WorldManager(BASIC_MAP)
+    mgr.create_connections_with_levels()
+    mgr.actual_level = mgr.seek_respawn()
+    mgr.move(DirectionEnum.south)
+    assert mgr.actual_level is mgr.levels[2, 1]
+
+
+def test_move_wrong():
+    mgr = WorldManager(BASIC_MAP)
+    mgr.create_connections_with_levels()
+    mgr.actual_level = mgr.seek_respawn()
+    with pytest.raises(PathNotFound) as e:
+        mgr.move(DirectionEnum.up)
+    assert e.value.args[0] is DirectionEnum.up
