@@ -32,3 +32,13 @@ def test_create_directions_on_map():
     assert dirs[DirectionEnum.south] is levels[2, 1]
     assert levels[1, 2].directions[DirectionEnum.east] is levels[2, 2]
     assert levels[2, 1].directions[DirectionEnum.north] is levels[2, 2]
+
+
+def test_seek_respawn():
+    mgr = WorldManager(BASIC_MAP)
+    assert mgr.seek_respawn() == (2, 2)
+
+
+def test_respawn_not_found():
+    mgr = WorldManager({})
+    assert mgr.seek_respawn() is None

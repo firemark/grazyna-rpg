@@ -1,8 +1,7 @@
-from json import loads
 
 from .monster import Monster
 from .level import Level
-from .enums import DirectionEnum
+from .enums import DirectionEnum, LevelType
 
 
 class WorldManager(object):
@@ -38,3 +37,9 @@ class WorldManager(object):
                     for d, cord in self.DIRECTIONS_TO_CONNECTIONS.items()
                 ) if another_level is not None
             })
+
+    def seek_respawn(self):
+        return next((
+            cord for cord, level in self.levels.items()
+            if level.type is LevelType.respawn
+        ), None)
