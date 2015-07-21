@@ -4,7 +4,7 @@ from .enums import LevelType
 class Level(object):
     __slots__ = (
         'monsters', 'items', 'name', 'description', 'type', 'stairs',
-        'monster_types', 'directions'
+        'monster_types', 'directions', 'cord'
     )
 
     def __init__(
@@ -16,5 +16,5 @@ class Level(object):
         self.monsters = []
         self.items = []
         self.stairs = stairs
-        self.directions = []
+        self.directions = {}
         self.monster_types = [x for x in monster_types if x != "-"] or []
