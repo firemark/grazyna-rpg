@@ -4,11 +4,11 @@ from .enums import LevelType, DirectionEnum
 from .world_manager import WorldManager, PathNotFound
 
 BASIC_MAP = {
-    '2-2': {'title_type': 'respawn', 'name': 'xx1',
+    '2-2': {'tile_type': 'respawn', 'name': 'xx1',
             'mon_type1': 'animal', 'mon_type2': '-', 'mon_type3': '-'},
-    '1-2': {'title_type': 'forest', 'name': 'xx2',
+    '1-2': {'tile_type': 'forest', 'name': 'xx2',
             'mon_type1': 'animal', 'mon_type2': '-', 'mon_type3': '-'},
-    '2-1': {'title_type': 'forest', 'name': 'xx3',
+    '2-1': {'tile_type': 'forest', 'name': 'xx3',
             'mon_type1': 'animal', 'mon_type2': '-', 'mon_type3': '-'},
 }
 

@@ -1,7 +1,7 @@
-
 from .monster import Monster
 from .level import Level
 from .enums import DirectionEnum, LevelType
+from .abstract.map import AbstractMap
 
 class PathNotFound(Exception):
     pass
@@ -18,12 +18,24 @@ class WorldManager(object):
     actual_level = None
 
     def __init__(self, map):
-        self.levels = {
+        if isinstance(map, dict):
+            self.levels = self.generate_levels_from_raw_data(map)
+        elif isinstance(map, AbstractMap):
+            self.levels = map.generate()
+        else:
+            raise AttributeError(
+                'map object is not a dict '
+                'and dont inheritance from AbstractMap'
+            )
+
+    @staticmethod
+    def generate_levels_from_raw_data(map):
+        return {
             tuple(int(s) for s in key.split('-')): Level(
-                type=data['title_type'],
+                type=data['tile_type'],
                 name=data['name'],
                 monster_types=[data['mon_type%d' % i] for i in range(1, 4)],
-            ) for key, data in map.items()
+            ) for key, data in map.items() if data.get('tile_type')
         }
 
     def create_connections_with_levels(self):
@@ -52,4 +64,3 @@ class WorldManager(object):
             self.actual_level = self.actual_level.directions[direction]
         except:
             raise PathNotFound(direction)
-

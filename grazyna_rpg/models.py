@@ -1,5 +1,5 @@
 from sqlalchemy import (
-    Column, Integer, String, ForeignKey, DateTime, Date, Time, Text, func
+    Column, Integer, String, ForeignKey, DateTime, Enum, func
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -16,9 +16,10 @@ class Model(Base):
 
 
 class Hero(Model):
+    __tablename__ = 'hero'
     username = Column(String(50), unique=True)
     race = Column(String(50))
-    world = Column(String(50))  #probls useless
+    world = Column(String(50))  # probls useless
     x = Column(Integer, default=0)
     y = Column(Integer, default=0)
     z = Column(Integer, default=0)
@@ -30,11 +31,13 @@ class Hero(Model):
 
 
 class Item(Model):
-    hero_id = ForeignKey(Hero, nullable=False)
+    __tablename__ = 'item'
+    hero_id = ForeignKey(Hero.id, nullable=False)
     name = Column(String(50))
-    type = Column(String(1), [e.value for e in ItemType])
+    type = Column(String(1), Enum(*[e.value for e in ItemType]))
 
 
 class Skill(Model):
-    hero_id = ForeignKey(Hero, nullable=False)
+    __tablename__ = 'skill'
+    hero_id = ForeignKey(Hero.id, nullable=False)
     name = Column(String(50))

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 
 requires = [
-    'grazyna>=0.5.2',
+    'grazyna>=0.5.3',
     'pytest==2.7.2'
 ]
 
