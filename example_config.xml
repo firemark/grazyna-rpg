@@ -1,0 +1,76 @@
+<game>
+    <items>
+        <armor name="cotton clothes" level="0" defence="1" />
+        <armor name="royal clothes" level="0"  defence="1" charisma="15" />
+        <armor name="leather armor" level="1"  defence="10" />
+        <armor name="bronze armor" level="5"  defence="15" charisma="2" />
+        <armor name="iron armor" level="7" defence="20" charisma="3" />
+        <armor name="steel armor" level="10" defence="30" charisma="5" />
+
+        <melee name="wooden sword" level="0" attack="3" ticks="4" />
+        <melee name="iron sword" level="1" attack="6" ticks="3" />
+        <melee name="steel sword" level="3" attack="10" ticks="2" />
+        <melee name="iron axe" level="2" attack="8" ticks="4"  miss_prob="0.12" />
+        <melee name="steel axe" level="4" attack="12" ticks="6"  miss_prob="0.1" />
+        <melee name="stone hammer" level="3" attack="15" ticks="8" miss_prob="0.3" />
+        <melee name="steel hammer" level="4" attack="20" ticks="10" miss_prob="0.2" />
+
+        <food name="raspberries" add:hp="1" />
+        <food name="apple" add:hp="5" />
+        <food name="cheese" add:hp="10" />
+        <food name="fish" add:hp="15" />
+        <food name="chicken" add:hp="17" />
+        <food name="beef" add:hp="20" />
+        <food name="cake" add:hp="25" />
+
+        <potion name="water" add:mana="5" />
+        <potion name="beer" add:mana="10" />
+        <potion name="wine" add:hp="20" add:effect="kac" />
+        <potion name="cider" add:mana="20" add:effect="kac" />
+        <potion name="whiskey" add:effect="kurwica" />
+        <potion name="rum" sub:effect="rabies" />
+    </items>
+    <item_bonuses>
+        <!-- not implemented yet -->
+        <bonus format="%s of fire" add:level="1" add:attack="4" />
+        <bonus format="%s of wind" add:level="2" mul:ticks="0.5" />
+        <bonus format="%s of thunder" add:level="3" add:attack="8" />
+        <bonus format="shining %s" add:level="2" add:defence="2" />
+    </item_bonuses>
+    <monsters>
+        <goblin hp="30" attack="5" level="2" defence="5" places="forest, path, dungeon">
+            <red hp="40" attack="6" level="3" places="forest, dungeon" />
+            <green hp="20" attack="3" level="1" places="forest" />
+            <black hp="50" attack="7" level="4" places="dungeon" />
+        </goblin>
+        <ork hp="50" attack="10" level="3" defence="10" places="forest, path, dungeon">
+            <red hp="60" attack="12" level="4" places="forest, dungeon" />
+            <green hp="40" attack="5" level="2" places="forest" />
+            <black hp="60" attack="15" level="5" places="dungeon" />
+        </ork>
+        <wolf hp="20" attack="4" defence="2" level="1" places="forest, path">
+            <gray hp="40" />
+            <silver throw="rabies" places="forest" />
+        </wolf>
+        <skeleton hp="20" attack="5" defence="5" level="2" places="dungeon">
+            <black hp="30" attack="7" defence="6" level="3" />
+        </skeleton>
+        <zombie hp="40" attack="6" defence="8" level="3" places="dungeon"></zombie>
+        <pilif hp="300" attack="30" defence="30" level="20" places="hell"></pilif>
+        <dilap hp="100" attack="20" defence="30" level="10" places="hell"></dilap>
+        <anyzarg hp="100" attack="10" defence="20" level="5" places="hell"></anyzarg>
+    </monsters>
+    <speels>
+        <speel name="kurwa" mana="10" eval="$$.attack($$.attackers, power=1.2)" />
+        <speel name="cure" mana="10" eval="$$.cure($1, hp=5)" />
+        <speel name="fireball" mana="20" eval="$$.attack($1, hp=10); $$.throw($1, effect='fire')" />
+        <speel name="freeze" mana="30" eval="$$.throw([$1], effect='freeze')" />
+    </speels>
+    <effects>
+        <effect name="kurwica" mul:speed="2" mul:power="1.2" time="10" />
+        <effect name="kac" mul:speed="0.5" time="10" />
+        <effect name="freeze" mul:speed="0.25" time="15" />
+        <effect name="fire" add:hp="-5" time="4" />
+        <effect name="rabies" add:hp="-1" time="100" />
+    </effects>
+</game>

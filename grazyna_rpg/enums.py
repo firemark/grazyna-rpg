@@ -19,9 +19,11 @@ class DirectionEnum(Enum):
 
 
 class ItemType(Enum):
-    sword = 's'
+    melee = 'm'
     bow = 'b'
     armor = 'a'
+    food = 'f'
+    potion = 't'
 
 
 class LevelType(Enum):

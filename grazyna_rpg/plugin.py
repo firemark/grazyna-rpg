@@ -10,7 +10,6 @@ from grazyna_rpg.enums import DirectionEnum
 from json import load as load_json
 
 
-
 @init_plugin
 def on_load(plugin, protocol):
     config = plugin.config
@@ -36,6 +35,14 @@ def go(bot, where: DirectionEnum):
         bot.say('direction %s doesnt exist' % where.name)
     else:
         where_i_am(bot)
+
+#shorcuts methods
+for direction in DirectionEnum:
+    x = register(
+        reg='^%s *$' % direction.value,
+        name='go_%s' % direction.name,
+    )(lambda bot: go(bot, direction))
+    print(x.name)
 
 
 @register(cmd='where')
